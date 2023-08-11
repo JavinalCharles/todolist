@@ -1,0 +1,59 @@
+body {
+	background-color: rgb(148, 85, 85);
+	color: #FFFFFF;
+	font-family: 'Montserrat', "Ubuntu", sans-serif;
+	font-size: 1rem;
+}
+
+p, label {
+	line-height: 1.5;;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Arvo", "Roboto Slab", serif;
+	color: #FFFFFF;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+h1 {
+	font-size: 2.6rem;
+}
+h2 {
+	font-size: 2.3rem;
+}
+h3 {
+	font-size: 2.0rem;
+}
+h4 {
+	font-size: 1.7rem;
+}
+h5 {
+	font-size: 1.4rem;
+}
+h6 {
+	font-size: 1.1rem;
+	font-style: italic;
+}
+
+p {
+	font-size: inherit;
+}
+
+a, a:visited {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+a:hover, a:active {
+	color: rgb(99, 187, 78);
+}
+
+main {
+	width: 100%;
+	min-height: 100vh;
+}
+
+section {
+	width: 100%;
+}
