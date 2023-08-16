@@ -1,0 +1,25 @@
+<main>
+	<header id="header_section">
+		<h1>My To-Do-List</h1>
+	</header>
+	<section id="main_section">
+		<table id="todolist_table">
+			<tbody>
+				<tr>
+					<th scope="col">Task #</th>
+					<th scope="col">Tasks</th>
+					<th scope="col">Priority</th>
+					<th scope="col">Actions</th>
+				</tr>
+				<% for (let i = 0; i < todoData.length; i++) { %>
+				<tr>
+					<td><%= todoData[i].todoID %></td>
+					<td><%= todoData[i].tasks %></td>
+					<td><%= todoData[i].priorityID %></td>
+					<td></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</section>
+</main>

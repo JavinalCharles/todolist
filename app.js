@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const ejs = require("ejs")
+const ejs = require("ejs");
 
 const app = express();
 app.use(cors());
@@ -10,7 +10,6 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 const PORT = process.env.PORT || 3000;
-
 
 app.use("/", require(__dirname + "/routes/routes"));
 

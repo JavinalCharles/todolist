@@ -1,8 +1,9 @@
 body {
-	background-color: rgb(148, 85, 85);
-	color: #FFFFFF;
+	background-color: #900C3F;
+	color: #F8DE22;
 	font-family: 'Montserrat', "Ubuntu", sans-serif;
 	font-size: 1rem;
+	padding: 0.5rem;
 }
 
 p, label {
@@ -11,7 +12,7 @@ p, label {
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: "Arvo", "Roboto Slab", serif;
-	color: #FFFFFF;
+	color: #F8DE22;
 	font-weight: 700;
 	line-height: 1.2;
 }
@@ -41,12 +42,12 @@ p {
 }
 
 a, a:visited {
-	color: #FFFFFF;
+	color: inherit;
 	text-decoration: underline;
 }
 
 a:hover, a:active {
-	color: rgb(99, 187, 78);
+	color: #F94C10;
 }
 
 main {

@@ -14,6 +14,7 @@
 	<!-- User-Defined Stylesheets-->
 	<link rel="stylesheet" href="/CSS/reset.css">
 	<link rel="stylesheet" href="/CSS/main.css">
+	<link rel="stylesheet" href="/CSS/<%= css %>">
 
 	<!-- CDNS and External Scripts -->
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -21,7 +22,7 @@
 <body>
 	<%- include("header"); -%>
 
-	<i data-feather="circle"></i>
+	<%- include(page, data); -%>
 
 	<%- include("footer"); -%>
 
