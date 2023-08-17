@@ -7,4 +7,7 @@ const router = express.Router();
 router.get("/", pages.homeView);
 router.get("/about",  pages.aboutView);
 
+router.put('/done/:taskID', pages.finishTask);
+
+
 module.exports = router;

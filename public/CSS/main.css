@@ -150,6 +150,12 @@ button.btn:hover {
 	cursor: pointer;
 }
 
+/* button.btn-disabled {
+	pointer-events: none;
+	cursor: not-allowed;
+	opacity: 0.65;
+} */
+
 button.done-btn {
 	background-color: #F8DE22;
 }
@@ -157,6 +163,8 @@ button.done-btn {
 button.del-btn {
 	background-color: #C70039;
 }
+
+
 
 /* Extra Small */
 @media screen and (min-width: 512px) {

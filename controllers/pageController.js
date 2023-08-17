@@ -16,33 +16,47 @@ dbcon.connect(function(err) {
 	})
 });
 
-const query = "SELECT todo.todoID, todo.tasks, todo.priorityID, priority.text FROM todo INNER JOIN priority ON todo.priorityID = priority.id ORDER BY todo.priorityID DESC";
+
 
 const homeView = (req, res) => {
+	const query = "SELECT todo.todoID, todo.tasks, todo.priorityID, priority.text FROM todo INNER JOIN priority ON todo.priorityID = priority.id ORDER BY todo.priorityID DESC";
 	dbcon.query(query, function(err, queryResult, fields) {
-		if (err) {
-			res.render("index", {
-				page: "home", css: "home.css", todoData: {}
-			});
+		let todolist = {};
+		if (!err) {
+			todolist = queryResult;
 		}
-		else {
-			const todolist = queryResult;
-			// console.log(todolist);
-			res.render("index", {
-				page: "home", css: "home.css", data: {todoData: todolist}
-			});
-		}
+		res.render("index", {
+			page: "home", css: "home.css", data: {todoData: todolist}
+		});
 	})
 };
 
 const aboutView = (req, res) => {
 	res.render("index", {
-		page: "about", css: "about.css"
+		page: "about", css: "about.css", data: {}
 	});
 };
+
+const finishTask = (req, res) => {
+	console.log(req.params);
+	let p = req.params.taskID;
+
+	const updateQuery = "UPDATE todo SET priorityID = 1 WHERE todoID = " + p;
+
+	dbcon.query(updateQuery, function(err, queryResult, fields) {
+		if (err) {
+			throw err;
+		}
+		else {
+			console.log(queryResult);
+			res.json(queryResult);
+		}
+	});
+}
 
 module.exports = {
 	dbcon,
 	homeView,
-	aboutView
+	aboutView,
+	finishTask
 };
