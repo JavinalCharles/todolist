@@ -27,7 +27,7 @@ const homeView = (req, res) => {
 		}
 		else {
 			const todolist = queryResult;
-			console.log(todolist);
+			// console.log(todolist);
 			res.render("index", {
 				page: "home", css: "home.css", data: {todoData: todolist}
 			});

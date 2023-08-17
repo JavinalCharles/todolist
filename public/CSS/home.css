@@ -16,47 +16,38 @@ main {
 	text-align: center;
 }
 
-table#todolist_table {
-	display: block;
-	width: 100%;
-}
-
-table#todolist_table thead {
-	display: block;
-	width: 100%;
-	background-color: #F8DE22;
-	color: #C70039;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-}
-
-table#todolist_table tr {
-	display: block;
-	width: 100%;
-	padding: 0;
-}
-
-td {
-	border: 1px solid white;
-}
-
-table#todolist_table tr th{
-	display: inline-block;
+.task-id-p {
 	font-weight: 700;
-	color: inherit;
-	font-size: 1.75rem;
-	width: 24%;
-	text-align: center;
-	margin: 0;
+	text-align: left;
 }
 
-@media scree and (min-width: 560px) {
+.priority-p {
+	font-weight: 800;
+	font-style: italic;
+	text-align: right;
+}
+
+.tasks-p {
+	padding: 1rem;
+	font-weight: 700;
+	font-style: italic;
+	text-align: center;
+}
+
+.todo-item-container {
+	background-color: #F8DE22;
+	color: #900C3F;
+	border-radius: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+@media scree and (min-width: 512px) {
 	main {
 		width: 90%;
 	}
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (min-width: 720px) {
 	main {
 		width: 75%;
 	}

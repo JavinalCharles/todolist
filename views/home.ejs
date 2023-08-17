@@ -3,23 +3,24 @@
 		<h1>My To-Do-List</h1>
 	</header>
 	<section id="main_section">
-		<table id="todolist_table">
-			<tbody>
-				<tr>
-					<th scope="col">Task #</th>
-					<th scope="col">Tasks</th>
-					<th scope="col">Priority</th>
-					<th scope="col">Actions</th>
-				</tr>
-				<% for (let i = 0; i < todoData.length; i++) { %>
-				<tr>
-					<td><%= todoData[i].todoID %></td>
-					<td><%= todoData[i].tasks %></td>
-					<td><%= todoData[i].priorityID %></td>
-					<td></td>
-				</tr>
-				<% } %>
-			</tbody>
-		</table>
+		<% for(let i = 0; i < todoData.length; ++i) { %>
+		<div class="grid-box todo-item-container">
+			<div class="grid-item gi-xxs-2 gi-xs-6 gi-sm-6">
+				<p class="task-id-p">#<%= todoData[i].todoID; %></p>
+			</div>
+			<div class="grid-item gi-xxs-10 gi-xs-6 gi-sm-6">
+				<p class="priority-p">priority level: <%= todoData[i].text; %></p>
+			</div>
+			<div class="grid-item gi-xxs-12 gi-xs-12 gi-sm-6">
+				<p class="tasks-p"><%= todoData[i].tasks; %></p>
+			</div>
+			<div class="grid-item gi-xxs-12 gi-xs-12 gi-sm-6">
+				<div class="flex-box flex-xss-jc flex-sm-je">
+					<button class="btn done-btn" type="button" value="<%= todoData[i].todoID; %>">Mark Done</button>
+					<button class="btn del-btn" type="button" value="<%= todoData[i].todoID; %>">Delete Task</button>
+				</div>
+			</div>
+		</div>
+		<% } %>
 	</section>
 </main>
