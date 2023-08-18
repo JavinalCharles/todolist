@@ -2,6 +2,26 @@
 	<header id="header_section">
 		<h1>My To-Do-List</h1>
 	</header>
+	<section id="add_section">
+		<form class="form grid-box" id="add_task_form" action="javascript:submitAddTask();">
+			<div class="form-input-box gi-xxs-12 gi-md-8">
+				<input class="form-input" type="text" name="task" placeholder="Task" maxlength="256" required>
+				<label class="form-input-label" for="task">Task</label>
+			</div>
+			<div class="form-input-box gi-xxs-12 gi-md-4">
+				<select class="form-select" name="priority" required>
+					<option></option>
+					<% for (let i = 0; i < priorities.length; ++i) { %>
+						<option value="<%= priorities[i].id %>"><%= priorities[i].text; %></option>
+					<% } %>
+				</select>
+				<label class="form-input-label" for="priority">Priority Level</label>
+			</div>
+			<div class="form-input-box gi-xxs-12 gi-md-12 flex-box flex-xss-jc">
+				<button type="submit" class="btn submit-btn">Add Task</button>
+			</div>
+		</form>
+	</section>
 	<section id="main_section">
 		<% for(let i = 0; i < todoData.length; ++i) { %>
 		<div class="grid-box todo-item-container">

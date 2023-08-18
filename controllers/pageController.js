@@ -25,8 +25,9 @@ const homeView = (req, res) => {
 		if (!err) {
 			todolist = queryResult;
 		}
+		console.log(priorityData);
 		res.render("index", {
-			page: "home", css: "home.css", data: {todoData: todolist}
+			page: "home", css: "home.css", data: {todoData: todolist, priorities: priorityData}
 		});
 	})
 };

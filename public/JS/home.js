@@ -7,17 +7,22 @@ function sendDoneTaskRequest(event) {
 	httpRequest.onreadystatechange = () => {
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 			// Everything is good, the response was received.
-			t.removeAttribute("disabled");
-			console.log("DONE!");
-			console.log(httpRequest.responseText);
+			if (httpRequest.status == 200) {
+				t.removeAttribute("disabled");
+				console.log("DONE!");
+				console.log(httpRequest.responseText);
 
-			let wholeTodoDiv = t.parentNode.parentNode.parentNode;
-			let parentDiv = wholeTodoDiv.parentNode;
+				let wholeTodoDiv = t.parentNode.parentNode.parentNode;
+				let parentDiv = wholeTodoDiv.parentNode;
 
-			wholeTodoDiv.querySelector("div.priority-div").querySelector("p.priority-p").innerHTML = "priority level: Finished";
-			wholeTodoDiv.querySelector("div.action-div").querySelector("div.flex-buttons").removeChild(t);
-			parentDiv.removeChild(wholeTodoDiv);
-			parentDiv.insertAdjacentElement("beforeEnd", wholeTodoDiv);
+				wholeTodoDiv.querySelector("div.priority-div").querySelector("p.priority-p").innerHTML = "priority level: Finished";
+				wholeTodoDiv.querySelector("div.action-div").querySelector("div.flex-buttons").removeChild(t);
+				parentDiv.removeChild(wholeTodoDiv);
+				parentDiv.insertAdjacentElement("beforeEnd", wholeTodoDiv);
+			}
+			else {
+				console.log(httpRequest.responseText);
+			}
 		} else {
 			// Not ready yet.
 			console.log("NOT YET DONE!");
@@ -26,6 +31,10 @@ function sendDoneTaskRequest(event) {
 
 	httpRequest.open("PUT", "http://localhost:3000/done/" + n);
 	httpRequest.send();
+}
+
+function submitAddTask() {
+
 }
 
 let doneButtons = [...document.querySelectorAll("button.done-btn")];
