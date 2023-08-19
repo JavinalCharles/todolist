@@ -41,6 +41,13 @@ main {
 	margin-bottom: 0.5rem;
 }
 
+#add_section {
+	background-color: #F94C10;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+	border-radius: 1rem;
+}
+
 @media scree and (min-width: 512px) {
 	main {
 		width: 90%;

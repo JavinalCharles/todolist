@@ -25,7 +25,7 @@ const homeView = (req, res) => {
 		if (!err) {
 			todolist = queryResult;
 		}
-		console.log(priorityData);
+		// console.log(priorityData);
 		res.render("index", {
 			page: "home", css: "home.css", data: {todoData: todolist, priorities: priorityData}
 		});
@@ -42,21 +42,43 @@ const finishTask = (req, res) => {
 	console.log(req.params);
 	let p = req.params.taskID;
 
-	const updateQuery = "UPDATE todo SET priorityID = 1 WHERE todoID = " + p;
+	const updateQuery = 'UPDATE todo SET priorityID = 1 WHERE todoID = ' + p;
 
 	dbcon.query(updateQuery, function(err, queryResult, fields) {
 		if (err) {
 			throw err;
 		}
 		else {
-			console.log(queryResult);
+			// console.log(queryResult);
 			res.json(queryResult);
 		}
 	});
 }
 
+const addTask = (req, res) => {
+	let task = req.body.taskStr;
+	let priority = parseInt(req.body.priorityID);
+	console.log(task);
+	console.log(priority);
+	if (task.length > 256 || task.length < 1 || isNaN(priority)) {
+		res.status(500).send({error: "Data Sent is invalid. Try again"});
+	}
+	else {
+		const insertQuery = "INSERT INTO todo (tasks, priorityID) VALUES( \"" + task + "\", " + priority + ")";
+		dbcon.query(insertQuery, function(err, queryResult, fields) {
+			if (err) {
+				throw err;
+			}
+			else {
+				res.json(queryResult);
+			}
+		});
+	}
+}
+
 module.exports = {
 	dbcon,
+	addTask,
 	homeView,
 	aboutView,
 	finishTask

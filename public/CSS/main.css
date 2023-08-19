@@ -176,9 +176,13 @@ section {
 	width: 100%;
 	margin: 0 auto;
 	height: 2.75rem;
-	border-radius: 0.5rem;
+	border-radius: 0.67rem;
 	padding-top: 0.75rem;
 	font-size: 1.5rem;
+}
+
+.form-input-box > input.form-input[type=text]:focus:invalid {
+	outline: 6px solid red;
 }
 
 .form-input-box .form-input:focus + .form-input-label, .form-input-box .form-select:focus + .form-input-label {
@@ -208,11 +212,19 @@ button.btn {
 	color: #FFFFFF;
 }
 
-button.btn:hover {
+button.btn:disabled {
+	opacity: 0.5;
+}
+
+button.btn:hover:not(:disabled) {
 	background-color: #FFFFFF;
 	color: #000000;
 	cursor: pointer;
 }
+
+/* button.done-btn:disabled:hover, button.del-btn:disabled:hover, button.submit-btn:hover {
+	
+} */
 
 button.done-btn {
 	background-color: #F8DE22;

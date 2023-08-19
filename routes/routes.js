@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/", pages.homeView);
 router.get("/about",  pages.aboutView);
 
+router.post("/", pages.addTask);
 router.put('/done/:taskID', pages.finishTask);
 
 

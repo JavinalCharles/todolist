@@ -1,3 +1,9 @@
+let doneButtons = [...document.querySelectorAll("button.done-btn")];
+let delButtons = [...document.querySelectorAll("button.del-btn")];
+
+let addTaskButton = document.getElementById("add-task-btn");
+let taskInput = document.getElementById("task-field-input");
+
 function sendDoneTaskRequest(event) {
 	let t = event.currentTarget;
 	let n = t.getAttribute("value");
@@ -34,17 +40,42 @@ function sendDoneTaskRequest(event) {
 }
 
 function submitAddTask() {
+	addTaskButton.setAttribute("disabled", "");
+	let p = document.getElementById("priority-selection");
 
+	const httpRequest = new XMLHttpRequest();
+
+	httpRequest.onreadystatechange = () => {
+		if (httpRequest.readyState == XMLHttpRequest.DONE) {
+			addTaskButton.removeAttribute("disabled");
+			if (httpRequest.status == 200) {
+				taskInput.value = "";
+
+				let options = p.options;
+				for (let i = 0; i < options.length; ++i) {
+					options[i].selected = false;
+				}
+			}
+			// console.log(httpRequest.responseText);
+		}
+		else {
+			console.log(httpRequest.responseText);
+		}
+	}
+	httpRequest.open("POST", "http://localhost:3000/", true);
+	httpRequest.setRequestHeader(
+		"Content-Type",
+    	"application/json",
+	)
+	let data = JSON.stringify({
+		'taskStr': taskInput.value,
+		'priorityID': p.value
+	});
+
+	console.log(data);
+	httpRequest.send(data);
 }
 
-let doneButtons = [...document.querySelectorAll("button.done-btn")];
-let delButtons = [...document.querySelectorAll("button.del-btn")];
-
-// console.log("done-button");
-// console.log(doneButtons);
-
-// console.log("del-button");
-// console.log(delButtons);
 doneButtons.forEach((buttonElement) => {
 	buttonElement.addEventListener("click", sendDoneTaskRequest);
 });
