@@ -23,26 +23,7 @@
 		</form>
 	</section>
 	<section id="main_section">
-		<% for(let i = 0; i < todoData.length; ++i) { %>
-		<div class="grid-box todo-item-container">
-			<div class="grid-item gi-xxs-2 gi-xs-6 gi-sm-6">
-				<p class="task-id-p">#<%= todoData[i].todoID; %></p>
-			</div>
-			<div class="grid-item gi-xxs-10 gi-xs-6 gi-sm-6 priority-div">
-				<p class="priority-p">priority level: <%= todoData[i].text; %></p>
-			</div>
-			<div class="grid-item gi-xxs-12 gi-xs-12 gi-sm-6">
-				<p class="tasks-p"><%= todoData[i].tasks; %></p>
-			</div>
-			<div class="grid-item gi-xxs-12 gi-xs-12 gi-sm-6 action-div">
-				<div class="flex-buttons flex-box flex-xss-jc flex-sm-je">
-					<% if (todoData[i].priorityID != 1) { %>
-					<button class="btn done-btn" type="button" value="<%= todoData[i].todoID; %>">Mark Done</button>
-					<% } %>
-					<button class="btn del-btn" type="button" value="<%= todoData[i].todoID; %>">Delete Task</button>
-				</div>
-			</div>
-		</div>
-		<% } %>
+
 	</section>
 </main>
+<%- "<script>let todolist = " + JSON.stringify(todoData) + "</script>"; -%>

@@ -48,6 +48,21 @@ main {
 	border-radius: 1rem;
 }
 
+#main_section {
+	position: relative;
+	min-height: 256px;
+}
+
+.todo-item-container {
+	position: relative;
+	left: 100%;
+	transition: all 0.8s;
+}
+
+.todo-item-container.left-transition {
+	left: 0;
+}
+
 @media scree and (min-width: 512px) {
 	main {
 		width: 90%;
