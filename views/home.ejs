@@ -5,7 +5,7 @@
 	<section id="add_section">
 		<form class="form grid-box" id="add_task_form" action="javascript:submitAddTask();">
 			<div class="form-input-box gi-xxs-12 gi-md-8">
-				<input id="task-field-input" class="form-input" type="text" name="task" placeholder="Task" maxlength="256" pattern="[\w\s]{1, 256}" required>
+				<input id="task-field-input" class="form-input" type="text" name="task" placeholder="Task" required maxlength="140" pattern="^[a-zA-Z0-9 ]{1, 140}$">
 				<label class="form-input-label" for="task">Task</label>
 			</div>
 			<div class="form-input-box gi-xxs-12 gi-md-4">

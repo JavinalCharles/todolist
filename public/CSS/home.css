@@ -72,11 +72,6 @@ main {
 	left: -100%;
 }
 
-/* .todo-item-container.squeeze-out > .grid-item {
-	transition: display 1.5s ease;
-	display: none;
-} */
-
 @media scree and (min-width: 512px) {
 	main {
 		width: 90%;

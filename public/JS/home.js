@@ -4,6 +4,15 @@ let delButtons = [...document.querySelectorAll("button.del-btn")];
 let addTaskButton = document.getElementById("add-task-btn");
 let taskInput = document.getElementById("task-field-input");
 
+function convertUnwantedChars(str) {
+	let dummyDiv = document.createElement("div");
+	dummyDiv.innerText = dummyDiv.textContent = str;
+	let s = dummyDiv.innerHTML;
+
+	let res = s.replace(/'/g, "&apos;").replace(/"/g, "&quot;");
+	return res;
+}
+
 function sendDoneTaskRequest(event) {
 	let t = event.currentTarget;
 	let n = t.getAttribute("value");
@@ -80,12 +89,12 @@ function sendDeleteTaskRequest(event) {
 function submitAddTask() {
 	addTaskButton.setAttribute("disabled", "");
 	let p = document.getElementById("priority-selection");
-	let newTask = taskInput.value;
+	let newTask = convertUnwantedChars(taskInput.value);
 	let pID = p.value;
 	let pText = p.options[p.selectedIndex].text;
 
 	const httpRequest = new XMLHttpRequest();
-
+	console.log("newTask: " + newTask);
 	httpRequest.onreadystatechange = () => {
 		if (httpRequest.readyState == XMLHttpRequest.DONE) {
 			addTaskButton.removeAttribute("disabled");
@@ -124,7 +133,7 @@ function submitAddTask() {
     	"application/json",
 	)
 	let data = JSON.stringify({
-		'taskStr': taskInput.value,
+		'taskStr': newTask,
 		'priorityID': p.value
 	});
 

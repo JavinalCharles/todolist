@@ -175,15 +175,17 @@ section {
 	outline: 2px solid #F8DE22;
 	width: 100%;
 	margin: 0 auto;
-	height: 2.75rem;
+	height: 2.40rem;
 	border-radius: 0.67rem;
 	padding-top: 0.75rem;
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 }
 
-.form-input-box > input.form-input[type=text]:focus:invalid {
+.form-input-box > input.form-input:invalid, .form-input-box > input.form-input:not(:valid) {
 	outline: 6px solid red;
 }
+
+
 
 .form-input-box .form-input:focus + .form-input-label, .form-input-box .form-select:focus + .form-input-label {
 	font-size: 0.67rem;
