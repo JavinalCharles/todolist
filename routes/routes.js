@@ -10,5 +10,6 @@ router.get("/about",  pages.aboutView);
 
 router.post("/", validateInputTask, pages.addTask);
 router.put('/done/:taskID', pages.finishTask);
+router.delete("/remove/:taskID", pages.removeTask);
 
 module.exports = router;

@@ -50,18 +50,32 @@ main {
 
 #main_section {
 	position: relative;
-	min-height: 256px;
+	height: min-content;
+	overflow: hidden;
 }
 
 .todo-item-container {
+	box-sizing: border-box;
 	position: relative;
-	left: 100%;
-	transition: all 0.8s;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: max-content;
+	transition: all 1.50s ease-in-out;
 }
 
-.todo-item-container.left-transition {
-	left: 0;
+.todo-item-container.right{
+	left: 100%;
 }
+
+.todo-item-container.left {
+	left: -100%;
+}
+
+/* .todo-item-container.squeeze-out > .grid-item {
+	transition: display 1.5s ease;
+	display: none;
+} */
 
 @media scree and (min-width: 512px) {
 	main {

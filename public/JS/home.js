@@ -14,16 +14,22 @@ function sendDoneTaskRequest(event) {
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 			// Everything is good, the response was received.
 			if (httpRequest.status == 200) {
-				console.log("DONE!");
+				// console.log("DONE!");
 				console.log(httpRequest.responseText);
 
 				let wholeTodoDiv = t.parentNode.parentNode.parentNode;
 				let parentDiv = wholeTodoDiv.parentNode;
 
-				wholeTodoDiv.querySelector("div.priority-div").querySelector("p.priority-p").innerHTML = "priority level: Finished";
-				wholeTodoDiv.querySelector("div.action-div").querySelector("div.flex-buttons").removeChild(t);
-				parentDiv.removeChild(wholeTodoDiv);
-				parentDiv.insertAdjacentElement("beforeEnd", wholeTodoDiv);
+				wholeTodoDiv.classList.add("left");
+				setTimeout(() => {
+					wholeTodoDiv.querySelector("div.priority-div").querySelector("p.priority-p").innerHTML = "priority level: Finished";
+					wholeTodoDiv.querySelector("div.action-div").querySelector("div.flex-buttons").removeChild(t);
+					parentDiv.removeChild(wholeTodoDiv);
+					parentDiv.insertAdjacentElement("beforeend", wholeTodoDiv);
+					setTimeout(() => {
+						wholeTodoDiv.classList.remove("left");
+					}, 10);
+				}, 1500);
 			}
 			else {
 				t.removeAttribute("disabled");
@@ -34,6 +40,41 @@ function sendDoneTaskRequest(event) {
 
 	httpRequest.open("PUT", "http://localhost:3000/done/" + n);
 	httpRequest.send();
+}
+
+function sendDeleteTaskRequest(event) {
+	let t = event.currentTarget;
+	let n = t.value;
+	t.setAttribute("disabled", "");
+
+	const XHR = new XMLHttpRequest();
+	XHR.onreadystatechange = () => {
+		if (XHR.readyState === XMLHttpRequest.DONE) {
+			if (XHR.status == 200) {
+				console.log(XHR.responseText);
+
+				let wholeTodoDiv = t.parentNode.parentNode.parentNode;
+				// let parentDiv = wholeTodoDiv.parentNode;
+				wholeTodoDiv.classList.add("left");
+				setTimeout(() => {
+					main.removeChild(wholeTodoDiv);
+					for (let i = 0; i < todolist.length; ++i) {
+						if (todolist[i].todoID == n) {
+							todolist.splice(i, 1);
+							break;
+						}
+					}
+				}, 1600);
+			}
+			else {
+				t.removeAttribute("disabled");
+				console.log(XHR.responseText);
+			}
+		}
+	}
+
+	XHR.open("DELETE", "http://localhost:3000/remove/" + n);
+	XHR.send();
 }
 
 function submitAddTask() {
@@ -59,7 +100,11 @@ function submitAddTask() {
 					text: pText
 				};
 				todolist.push(newToDo);
-				createToDoBox(newToDo);
+				let todoBox = createToDoBox(newToDo);
+				main.insertAdjacentElement("afterbegin", todoBox);
+				setTimeout(() => {
+					todoBox.classList.remove("right");
+				}, 50);
 
 				taskInput.value = "";
 				let options = p.options;
@@ -96,7 +141,7 @@ let createToDoBox = (todoObj) => {
 	let priorityText = todoObj.text;
 
 	let newBox = document.createElement("div");
-	newBox.classList.add("grid-box", "todo-item-container");
+	newBox.classList.add("grid-box", "todo-item-container", "right");
 
 	let idBox = document.createElement("div");
 	idBox.classList.add("grid-item", "gi-xss-2", "gi-xs-6", "gi-sm-6");
@@ -141,26 +186,25 @@ let createToDoBox = (todoObj) => {
 	delButton.setAttribute("type", "button");
 	delButton.setAttribute("value", taskID);
 	delButton.innerHTML = "Delete";
-	delButton.addEventListener("click", function(e){
-		console.log("Delete Button clicked for task ID: " + e.target.value)
-	});
+	delButton.addEventListener("click", sendDeleteTaskRequest);
 
 	actionsFlex.appendChild(delButton);
 	actionsBox.appendChild(actionsFlex);
 	newBox.appendChild(actionsBox);
 
-	// Append created elements
-	main.appendChild(newBox);
-
-	setTimeout(() => {
-		newBox.classList.add("left-transition");
-	}, 10);
+	return newBox;
 }
 
 if (todolist && main) {
 	console.log("Rendering Tasks");
+	let timeOut = 100;
 	for(let i = 0; i < todolist.length; ++i) {
-		createToDoBox(todolist[i]);
+		let newTodoBox = createToDoBox(todolist[i]);
+		main.appendChild(newTodoBox);
+		setTimeout(() => {
+			newTodoBox.classList.remove("right");
+		}, timeOut);
+		timeOut += 50;
 	}
 	console.log("Rendering finished.");
 }

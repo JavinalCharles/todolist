@@ -50,6 +50,7 @@ const finishTask = (req, res) => {
 		}
 		else {
 			// console.log(queryResult);
+			console.log(fields);
 			res.json(queryResult);
 		}
 	});
@@ -58,6 +59,7 @@ const finishTask = (req, res) => {
 const addTask = (req, res) => {
 	let task = req.body.taskStr;
 	let priorityID = req.body.priorityID;
+	// console.log(task);
 
 	const insertQuery = "INSERT INTO todo (tasks, priorityID) VALUES( \"" + task + "\", " + priorityID + ")";
 	dbcon.query(insertQuery, function(err, queryResult, fields) {
@@ -70,10 +72,26 @@ const addTask = (req, res) => {
 	});
 }
 
+const removeTask = (req, res) => {
+	let tID = req.params.taskID;
+	// console.log(tID);
+
+	const deleteQuery = "DELETE FROM todo WHERE todoID = " + tID;
+	dbcon.query(deleteQuery, function(err, queryResult, fields) {
+		if (err) {
+			throw err;
+		}
+		else {
+			res.json(queryResult);
+		}
+	})
+}
+
 module.exports = {
 	dbcon,
+	aboutView,
 	addTask,
 	homeView,
-	aboutView,
-	finishTask
+	finishTask,
+	removeTask
 };

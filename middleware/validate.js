@@ -1,9 +1,9 @@
 const validateInputTask = (req, res, next) => {
 	let task = req.body.taskStr;
 	let priorityID = parseInt(req.body.priorityID);
-	console.log(task);
-	console.log(priorityID);
 	if (1 <= task.length && task.length <= 256 && !isNaN(priorityID)) {
+		// task = task.replace(/[^\w\s]+/gi, '');
+		// req.body.taskStr = task;
 		next();
 	}
 	else {
