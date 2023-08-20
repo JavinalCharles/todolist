@@ -57,23 +57,17 @@ const finishTask = (req, res) => {
 
 const addTask = (req, res) => {
 	let task = req.body.taskStr;
-	let priority = parseInt(req.body.priorityID);
-	console.log(task);
-	console.log(priority);
-	if (task.length > 256 || task.length < 1 || isNaN(priority)) {
-		res.status(500).send({error: "Data Sent is invalid. Try again"});
-	}
-	else {
-		const insertQuery = "INSERT INTO todo (tasks, priorityID) VALUES( \"" + task + "\", " + priority + ")";
-		dbcon.query(insertQuery, function(err, queryResult, fields) {
-			if (err) {
-				throw err;
-			}
-			else {
-				res.json(queryResult);
-			}
-		});
-	}
+	let priorityID = req.body.priorityID;
+
+	const insertQuery = "INSERT INTO todo (tasks, priorityID) VALUES( \"" + task + "\", " + priorityID + ")";
+	dbcon.query(insertQuery, function(err, queryResult, fields) {
+		if (err) {
+			throw err;
+		}
+		else {
+			res.json(queryResult);
+		}
+	});
 }
 
 module.exports = {
