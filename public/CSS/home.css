@@ -44,14 +44,92 @@ main {
 #add_section {
 	background-color: #F94C10;
 	margin-top: 1rem;
-	margin-bottom: 2rem;
+	margin-bottom: 1.5rem;
 	border-radius: 1rem;
+}
+
+#sort_ui_section {
+	background-color: #C70039;
+	border-radius: 0.3rem;
+	margin-bottom: 1.5rem;
+	border: 2px solid #F8DE22;
+	color: #FFFFFF;
+	font-size: 1.1rem;
+	font-weight: 500;
+	vertical-align: center;
+	padding: 0;
 }
 
 #main_section {
 	position: relative;
 	height: min-content;
 	overflow: hidden;
+}
+
+ul#list_ui {
+	list-style: none;
+	height: min-content;
+	
+}
+
+ul#list_ui > li{
+	align-self: center;
+	margin: 0;
+	padding: 0;
+	height: 50px;
+	position: relative;
+}
+
+ul#list_ui > li > label {
+	display: inline-block;
+	height: 100%;
+	text-decoration: none;
+	padding: 0.8rem;
+	padding-right: 1.25rem;
+}
+
+ul#list_ui > li > label:hover{
+	cursor: pointer;
+	background-color: #FFFFFF;
+	color: #000000 !important;
+}
+
+ul#list_ui > li > label > input[type="radio"], ul#list_ui > li > label > input[type="checkbox"] {
+	visibility: hidden;
+	position: absolute;
+}
+
+ul#list_ui > li > label > i.fa-solid {
+	visibility: hidden;
+	position: absolute;
+	right: 0.5rem;
+	top: 1rem;
+	vertical-align: middle;
+}
+
+ul#list_ui > li > label > input[type="checkbox"]:not(:checked) + i.fa-solid.fa-sort-down {
+	visibility: visible;
+}
+
+ul#list_ui > li > label > input[type="checkbox"]:not(:checked) + i.fa-solid.fa-sort-up {
+	visibility: hidden;
+}
+
+ul#list_ui > li > label > input[type="checkbox"]:checked ~ i.fa-solid.fa-sort-down {
+	visibility: hidden;
+}
+
+ul#list_ui > li > label > input[type="checkbox"]:checked ~ i.fa-solid.fa-sort-up {
+	visibility: visible;
+}
+
+
+ul#list_ui > li > label:has(input[type="radio"]:checked) {
+	/* background-color: #FFFFFF; */
+	color: #FFFFFF;
+	text-decoration: underline;
+	-webkit-text-decoration: underline;
+	font-weight: 1000;
 }
 
 .todo-item-container {

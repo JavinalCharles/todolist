@@ -22,8 +22,41 @@
 			</div>
 		</form>
 	</section>
+	<section id="sort_ui_section">
+		<div id="sort_box" class="grid-box">
+			<h4 class="gi-xss-12 gi-md-4 gi-lg-2 gi-js-start">Sort by:</h4>
+			<div id="sort_interface" class="gi-xss-12 gi-md-8 gi-lg-10 gi-js-end flex-box flex-je flex-ac">
+				<ul id="list_ui" class="inline-list">
+					<li>
+						<label>ID
+							<input type="radio" name="sort_by" value="ID">
+						</label>
+					</li>
+					<li>
+						<label>Task
+							<input type="radio" name="sort_by" value="Task">
+						</label>
+					</li>
+					<li>
+						<label>Priority
+							<input type="radio" name="sort_by" value="Priority">
+						</label>
+					</li>
+					<li>
+						<label>Order &nbsp;
+							<input id="sort_order_checkbox" type="checkbox" name="sort_order">
+							<i class="fa-solid fa-sort-down"></i>
+							<i class="fa-solid fa-sort-up"></i>	
+						</label>
+						<a href=""></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
 	<section id="main_section">
 
 	</section>
 </main>
+
 <%- "<script>let todolist = " + JSON.stringify(todoData) + "</script>"; -%>

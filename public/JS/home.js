@@ -1,5 +1,5 @@
-let doneButtons = [...document.querySelectorAll("button.done-btn")];
-let delButtons = [...document.querySelectorAll("button.del-btn")];
+// let doneButtons = [...document.querySelectorAll("button.done-btn")];
+// let delButtons = [...document.querySelectorAll("button.del-btn")];
 
 let addTaskButton = document.getElementById("add-task-btn");
 let taskInput = document.getElementById("task-field-input");
@@ -204,8 +204,24 @@ let createToDoBox = (todoObj) => {
 	return newBox;
 }
 
-if (todolist && main) {
-	console.log("Rendering Tasks");
+
+function removeAllMainChildNodes() {
+	let allTodoBox = main.childNodes;
+	let timeOut = 100;
+
+	for (let i = 0; i < allTodoBox.length; ++i) {
+		setTimeout(() => {
+			let todoBox = allTodoBox.item(i);
+			todoBox.classList.add("left");
+			setTimeout(() => {
+				main.removeChild(todoBox);
+			}, 1600);
+		}, timeOut);
+		timeOut += 100;
+	}
+}
+
+function displayTodolist() {
 	let timeOut = 100;
 	for(let i = 0; i < todolist.length; ++i) {
 		let newTodoBox = createToDoBox(todolist[i]);
@@ -215,9 +231,73 @@ if (todolist && main) {
 		}, timeOut);
 		timeOut += 50;
 	}
-	console.log("Rendering finished.");
 }
 
-// doneButtons.forEach((buttonElement) => {
-// 	buttonElement.addEventListener("click", sendDoneTaskRequest);
-// });
+let radioButtons = [...document.querySelectorAll("input[type=\"radio\"]")];
+let sortCheckbox = document.getElementById("sort_order_checkbox");
+
+for(let i = 0; i < radioButtons.length; ++i) {
+	radioButtons[i].addEventListener("change", (e) => {
+		let v = e.currentTarget.value;
+		if (v == "ID") {
+			todolist = todolist.sort((a, b) => {
+				return sortCheckbox.checked ? a.todoID > b.todoID : a.todoID < b.todoID;
+			});
+		}
+		else if (v == "Task") {
+			todolist = todolist.sort((a, b) => {
+				return sortCheckbox.checked ? a.tasks > b.tasks : a.tasks < b.tasks;
+			});
+		}
+		else { // (v == "Priority" || v == "" )
+			todolist = todolist.sort((a, b) => {
+				return sortCheckbox.checked ? a.priorityID > b.priorityID : a.priorityID < b.priorityID;
+			});
+		}
+		removeAllMainChildNodes();
+		setTimeout(displayTodolist, 1700);
+		
+	});
+}
+
+sortCheckbox.addEventListener("change", (e) => {
+	let v = "";
+	for (let i = 0; i < radioButtons.length; ++i) {
+		if (radioButtons[i].checked) {
+			v = radioButtons[i].value;
+			break;
+		}
+	}
+	if (v == "ID") {
+		todolist = todolist.sort((a, b) => {
+			return sortCheckbox.checked ? a.todoID > b.todoID : a.todoID < b.todoID;
+		});
+	}
+	else if (v == "Task") {
+		todolist = todolist.sort((a, b) => {
+			return sortCheckbox.checked ? a.tasks > b.tasks : a.tasks < b.tasks;
+		});
+	}
+	else { // (v == "Priority" ||  v == ""
+		todolist = todolist.sort((a, b) => {
+			return sortCheckbox.checked ? a.priorityID > b.priorityID : a.priorityID < b.priorityID;
+		});
+	}
+	removeAllMainChildNodes();
+	setTimeout(displayTodolist, 1700);
+});
+
+if (todolist && main) {
+	// console.log("Rendering Tasks");
+	// let timeOut = 100;
+	// for(let i = 0; i < todolist.length; ++i) {
+	// 	let newTodoBox = createToDoBox(todolist[i]);
+	// 	main.appendChild(newTodoBox);
+	// 	setTimeout(() => {
+	// 		newTodoBox.classList.remove("right");
+	// 	}, timeOut);
+	// 	timeOut += 50;
+	// }
+	displayTodolist();
+	// console.log("Rendering finished.");
+}

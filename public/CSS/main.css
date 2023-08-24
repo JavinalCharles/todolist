@@ -59,11 +59,15 @@ section {
 	width: 100%;
 }
 
+ul.inline-list > li, ol.inline-list > li {
+	display: inline-block;
+}
+
 .grid-box {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	grid-gap: 0.25rem;
-	padding: 0.8rem;
+	padding: 0.4rem;
 }
 
 .grid-item {
@@ -72,6 +76,14 @@ section {
 
 .grid-item, .gi-1, .gi-xxs-1  {
 	grid-column-end: span 1;
+}
+
+.grid-item.gi-js-start {
+	justify-self: start;
+}
+
+.grid-item.gi-js-end {
+	justify-self: end;
 }
 
 .gi-2, .gi-xxs-2 {
@@ -137,7 +149,7 @@ section {
 .form-input-box {
 	padding: 0.8rem;
 	width: 100%;
-	border: 1px solid white;
+	/* border: 1px solid white; */
 	position: relative;
 }
 
